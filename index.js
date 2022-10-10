@@ -16,10 +16,16 @@ function clickHandler(){
     .then(Response => Response.json())
     .then(json => {
         console.log(json)
-        var translatedText = json.contents.translated;
-        outputDiv.innerText = translatedText;
+        if(json.contents){
+            var translatedText = json.contents.translated;
+            outputDiv.innerText = translatedText;
+        }
+        else{
+            outputDiv.innerText = json.error.message;
+        }
+        
     })
-    .catch(e=>console.log(e,e.message))
+    .catch(e=>console.log('error ha bhaiya',e,e.message))
 };
 
 btnTranslate.addEventListener("click", clickHandler)
